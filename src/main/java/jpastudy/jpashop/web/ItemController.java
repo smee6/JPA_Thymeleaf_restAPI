@@ -19,7 +19,7 @@ public class ItemController {
 
     @GetMapping(value = "/items/new")
     public String createForm(Model model) {
-        model.addAttribute("bookForms", new BookForm());
+        model.addAttribute("bookForm", new BookForm());
         return "items/createItemForm";
     }
 
