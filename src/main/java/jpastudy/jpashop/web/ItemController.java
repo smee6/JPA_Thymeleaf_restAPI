@@ -35,6 +35,16 @@ public class ItemController {
         book.setAuthor(form.getAuthor());
         book.setIsbn(form.getIsbn());
         itemService.saveItem(book);
-        return "redirect:/";
+        return "redirect:/items";
     }
+
+    @GetMapping(value = "/items")
+    public String list(Model model) {
+        List<Item> items = itemService.findItems();
+        model.addAttribute("items", items);
+        return "items/itemList";
+    }
+
+
+
 }
