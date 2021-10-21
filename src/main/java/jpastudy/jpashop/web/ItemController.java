@@ -25,7 +25,7 @@ public class ItemController {
 
     @PostMapping(value = "/items/new")
     public String create(@Valid BookForm form, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "items/createItemForm";
         }
         Book book = new Book();
@@ -44,6 +44,61 @@ public class ItemController {
         model.addAttribute("items", items);
         return "items/itemList";
     }
+
+    /**
+     * 상품 수정 폼
+     */
+    @GetMapping(value = "/items/{itemId}/edit")
+    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
+        Book item = (Book) itemService.findOne(itemId);
+        BookForm bookForm = new BookForm();
+        bookForm.setId(item.getId());
+        bookForm.setName(item.getName());
+        bookForm.setPrice(item.getPrice());
+        bookForm.setStockQuantity(item.getStockQuantity());
+        bookForm.setAuthor(item.getAuthor());
+        bookForm.setIsbn(item.getIsbn());
+        model.addAttribute("bookForm", bookForm);
+        return "items/updateItemForm";
+
+
+    }
+
+    /**
+     * 상품 수정
+     */
+    //@PostMapping(value = "/items/{itemId}/edit")
+    public String updateItem(@ModelAttribute("bookForm") BookForm form) {
+        Book bookForm = new Book();
+        bookForm.setId(form.getId());
+        bookForm.setName(form.getName());
+        bookForm.setPrice(form.getPrice());
+        bookForm.setStockQuantity(form.getStockQuantity());
+        bookForm.setAuthor(form.getAuthor());
+        bookForm.setIsbn(form.getIsbn());
+        itemService.saveItem(bookForm);
+        return "redirect:/items";
+    }
+
+    /**
+     * 상품 수정, 권장 코드
+     */
+    @PostMapping(value = "/items/{itemId}/edit")
+    public String updateItemDirtyChecking(@ModelAttribute("bookForm") BookForm form) {
+        itemService.updateItem(form.getId(), form.getName(), form.getPrice());
+        return "redirect:/items";
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
