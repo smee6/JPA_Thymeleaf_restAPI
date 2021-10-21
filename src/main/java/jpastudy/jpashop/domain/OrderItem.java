@@ -1,5 +1,6 @@
 package jpastudy.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpastudy.jpashop.domain.item.Item;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class OrderItem {
 
     //Order와의 관계 N:1 ... 지금 아이템이 N이지? N이 주인이지 그럼 외래키 가져야지? 예~~
     //조인컬럼 있어야겠지 then~
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;

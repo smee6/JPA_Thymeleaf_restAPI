@@ -32,6 +32,7 @@ public class ItemService {
         Item item = itemRepository.findOne(id);
         item.setName(name);
         item.setPrice(price);
+
     }
 
 }
