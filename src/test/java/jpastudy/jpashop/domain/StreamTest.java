@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StreamTest {
+
     @Test
     public void stream(){
         List<User> users = List.of(new User("Henry Kim", 10), new User("Lola Park", 5), new User("Prince Ken", 53));
